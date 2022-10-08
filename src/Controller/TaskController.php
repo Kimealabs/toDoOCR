@@ -3,65 +3,69 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Repository\TaskRepository;
 use App\Form\TaskType;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Routing\Annotation\Route;
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Services\RightToDeleteTaskService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
-    /**
-     * @Route("/tasks", name="task_list")
-     */
-    public function listAction(TaskRepository $taskRepository)
+    #[Route('/', name: 'homepage')]
+    public function toListTasksTodo()
     {
-        return $this->render('task/list.html.twig', ['tasks' => $taskRepository->findByIsDone(0)]);
+        return $this->redirectToRoute('task_list_todo');
+    }
+
+    #[Route('/todo-list', name: 'task_list_todo')]
+    public function listTaskIsDone(TaskRepository $taskRepository)
+    {
+        return $this->render('task/listTodo.html.twig', ['tasks' => $taskRepository->findByIsDone(0)]);
+    }
+
+    #[Route('/done-tasks', name: 'task_list_is_done')]
+    public function listTaskTodo(TaskRepository $taskRepository)
+    {
+        return $this->render('task/listIsDone.html.twig', ['tasks' => $taskRepository->findByIsDone(1)]);
     }
 
 
-    /**
-     * @Route("/tasks/create", name="task_create")
-     */
-    public function createAction(Request $request, EntityManagerInterface $em)
+    #[Route('/task/create', name: 'task_create')]
+    public function createTask(Request $request, EntityManagerInterface $em)
     {
+        $user = $this->getUser();
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$em = $this->getDoctrine()->getManager();
-
+            $task->setAuthor($user);
             $em->persist($task);
             $em->flush();
-
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list_todo');
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/tasks/{id}/edit", name="task_edit")
-     */
-    public function editAction(Task $task, Request $request, EntityManagerInterface $em)
+    #[Route('/task/{id}/edit', name: 'task_edit')]
+    public function editTask(Task $task, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em->flush();
-
             $this->addFlash('success', 'La tâche a bien été modifiée.');
-
-            return $this->redirectToRoute('task_list');
+            if ($task->isDone()) return $this->redirectToRoute('task_list_is_done');
+            return $this->redirectToRoute('task_list_todo');
         }
 
         return $this->render('task/edit.html.twig', [
@@ -70,33 +74,29 @@ class TaskController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/tasks/{id}/toggle", name="task_toggle")
-     */
-    public function toggleTaskAction(Task $task, EntityManagerInterface $em)
+    #[Route('/task/{id}/toggle', name: 'task_toggle')]
+    public function toggleTask(Task $task, EntityManagerInterface $em)
     {
         $task->toggle(!$task->isDone());
         $em->flush();
         if ($task->isDone()) {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list_todo');
         } else {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme à faire.', $task->getTitle()));
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('task_list_is_done');
         }
     }
 
-    /**
-     * @Route("/tasks/{id}/delete", name="task_delete")
-     */
-    public function deleteTaskAction(Task $task, EntityManagerInterface $em)
+    #[Route('/task/{id}/delete', name: 'task_delete')]
+    public function deleteTask(Task $task, EntityManagerInterface $em, RightToDeleteTaskService $rightToDeleteTaskService)
     {
-        //$em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+        if ($rightToDeleteTaskService->control($task)) {
+            $em->remove($task);
+            $em->flush();
+        }
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
-
-        return $this->redirectToRoute('task_list');
+        if ($task->isDone()) return $this->redirectToRoute('task_list_is_done');
+        return $this->redirectToRoute('task_list_todo');
     }
 }

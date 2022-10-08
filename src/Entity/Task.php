@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\DBAL\Types\Types;
 use App\Repository\TaskRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,6 +41,11 @@ class Task
      */
     private $isDone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tasks")
+     */
+    private $author = null;
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
@@ -57,9 +62,11 @@ class Task
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     public function getTitle()
@@ -67,9 +74,11 @@ class Task
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getContent()
@@ -77,9 +86,11 @@ class Task
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent($content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
     public function isDone()
@@ -100,6 +111,18 @@ class Task
     public function setIsDone(bool $isDone): self
     {
         $this->isDone = $isDone;
+
+        return $this;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
