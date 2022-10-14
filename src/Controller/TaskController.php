@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,8 +24,7 @@ class TaskController extends AbstractController
     #[Route('/tasks/todo', name: 'task_list_todo')]
     public function listTaskIsDone(TaskRepository $taskRepository)
     {
-        $tasksTodo = $taskRepository->findBy(['isDone' => 0], ['createdAt' => 'DESC']);
-        return $this->render('task/listTodo.html.twig', ['tasks' => $tasksTodo]);
+        return $this->render('task/listTodo.html.twig', ['tasks' => $taskRepository->findBy(['isDone' => 0], ['createdAt' => 'DESC'])]);
     }
 
     #[Route('/tasks/done', name: 'task_list_done')]
@@ -32,7 +32,6 @@ class TaskController extends AbstractController
     {
         return $this->render('task/listIsDone.html.twig', ['tasks' => $taskRepository->findBy(['isDone' => 1], ['createdAt' => 'DESC'])]);
     }
-
 
     #[Route('/task/create', name: 'task_create')]
     public function createTask(Request $request, EntityManagerInterface $emi)
@@ -56,7 +55,7 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/task/{id}/edit', name: 'task_edit')]
+    #[Route('/task/{id}/edit', name: 'task_edit', requirements: ['id' => '\d+'])]
     public function editTask(Task $task, Request $request, EntityManagerInterface $emi)
     {
         $form = $this->createForm(TaskType::class, $task);
@@ -77,7 +76,7 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/task/{id}/toggle', name: 'task_toggle')]
+    #[Route('/task/{id}/toggle', name: 'task_toggle', requirements: ['id' => '\d+'])]
     public function toggleTask(Task $task, EntityManagerInterface $emi)
     {
         $task->setIsDone(!$task->getIsDone());
@@ -91,7 +90,7 @@ class TaskController extends AbstractController
         }
     }
 
-    #[Route('/task/{id}/delete', name: 'task_delete')]
+    #[Route('/task/{id}/delete', name: 'task_delete', requirements: ['id' => '\d+'])]
     public function deleteTask(Task $task, EntityManagerInterface $emi)
     {
         $this->denyAccessUnlessGranted('delete_task', $task);
