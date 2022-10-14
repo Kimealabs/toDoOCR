@@ -19,7 +19,7 @@ class UserController extends AbstractController
         return $this->render('user/list.html.twig', ['users' => $userRepository->findAll()]);
     }
 
-    #[Route('/user/{id}', name: 'user_edit')]
+    #[Route('/user/{id}', name: 'user_edit', requirements: ['id' => '\d+'])]
     public function editUser(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em)
     {
         $form = $this->createForm(UserType::class, $user);

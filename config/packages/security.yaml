@@ -37,13 +37,10 @@ security:
             ROLE_ADMIN: ROLE_USER
 
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-        #- { path: /login, roles: PUBLIC_ACCESS }
-        #- { path: /signup, roles: PUBLIC_ACCESS }
-        - { path: ^/users, roles: ROLE_ADMIN }
         - { path: ^/tasks, roles: ROLE_USER }
         - { path: ^/task, roles: ROLE_USER }
+        - { path: ^/users, roles: ROLE_ADMIN }
+
 
 
 when@test:
