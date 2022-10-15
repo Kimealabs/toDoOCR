@@ -25,9 +25,6 @@ class TaskControllerTest extends WebTestCase
         $client->loginUser($user);
 
         $client->request('GET', $url);
-        dd($client);
-
-        //$this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', $message);
     }
 
