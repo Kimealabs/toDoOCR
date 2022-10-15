@@ -33,7 +33,7 @@ class TaskControllerTest extends WebTestCase
         return [
             ['/tasks/todo', 'Liste des tâches à faire'],
             ['/tasks/done', 'Liste des tâches terminées'],
-            ['/task/5/edit', 'Modifier une tâche'],
+            ['/task/4/edit', 'Modifier une tâche'],
             ['/task/create', 'Créer une tâche']
         ];
     }
@@ -65,8 +65,8 @@ class TaskControllerTest extends WebTestCase
     public function provideDataToTestTaskToggleButtonForChangeIsDoneStatus(): array
     {
         return [
-            [1, 5, '/tasks/done', 'Marquer non terminée'],
-            [0, 4, '/tasks/todo', 'Marquer comme à faire']
+            [1, 4, '/tasks/done', 'Marquer non terminée'],
+            [0, 3, '/tasks/todo', 'Marquer comme à faire']
         ];
     }
 
@@ -156,11 +156,11 @@ class TaskControllerTest extends WebTestCase
         self::ensureKernelShutdown();
 
         return [
-            [false, 5, '.alert.alert-success', 'La tâche a bien été supprimée.'],
-            [true, 2, '.alert.alert-success', 'La tâche a bien été supprimée.'],
-            [false, 3, '.alert.alert-danger', 'Vous n\'avez pas le droit de supprimer cette tâche !'],
+            [false, 4, '.alert.alert-success', 'La tâche a bien été supprimée.'],
+            [true, 1, '.alert.alert-success', 'La tâche a bien été supprimée.'],
             [false, 2, '.alert.alert-danger', 'Vous n\'avez pas le droit de supprimer cette tâche !'],
-            [true, 4, '.alert.alert-danger', 'Vous n\'avez pas le droit de supprimer cette tâche !'],
+            [false, 1, '.alert.alert-danger', 'Vous n\'avez pas le droit de supprimer cette tâche !'],
+            [true, 3, '.alert.alert-danger', 'Vous n\'avez pas le droit de supprimer cette tâche !'],
         ];
     }
 }
