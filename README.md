@@ -1,6 +1,7 @@
 <a name="readme-top"></a>
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/131ff1ae4896478f9e01ae84ffc4477c)](https://www.codacy.com/gh/Kimealabs/toDoOCR/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Kimealabs/toDoOCR&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f242225de6473dcc77f6/maintainability)](https://codeclimate.com/github/Kimealabs/toDoOCR/maintainability)
 <img src="https://img.shields.io/badge/PHP 8.1-black?style=flat-square&logo=Php" />
 <img src="https://img.shields.io/badge/LICENCE-MIT-blue" />
 
