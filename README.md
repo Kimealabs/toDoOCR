@@ -80,7 +80,7 @@ After the improvement, Symfony is on 5.4 (LTS) version and Application can make 
 
 <img src="https://img.shields.io/badge/PHPUnit 9.5-blue?style=for-the-badge" /> <img src="https://img.shields.io/badge/Dama 7.1-grey?style=for-the-badge" />
 
-<img src="https://img.shields.io/badge/Composer 2.3.10-280?style=for-the-badge&logo=Composer" /> <img src="https://img.shields.io/badge/Twig 5.4?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Composer 2.3.10-280?style=for-the-badge&logo=Composer" /> <img src="https://img.shields.io/badge/Twig 5.4-green?style=for-the-badge" />
 
 <img src="https://img.shields.io/badge/PHP 8.1-eef?style=for-the-badge&logo=PHP" /> <img src="https://img.shields.io/badge/Apache 2.4.54-fa0303?style=for-the-badge&logo=Apache" /> <img src="https://img.shields.io/badge/PhpMyAdmin 5.2.0-f2cb61?style=for-the-badge&logo=phpMyAdmin" />
 
