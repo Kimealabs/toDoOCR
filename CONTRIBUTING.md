@@ -2,7 +2,7 @@
 
 ToDo & Co TodoList Application is a collaborative project.
 
-Follow those steps to help and contribute coorectly to this project.
+Follow those steps to help and contribute to this project.
 
 ## Necessary to contribute
 You should have a minimum experience with :
@@ -99,8 +99,6 @@ Next, open a pull request (PR), explain clearly the subject and the description 
 
 You can create your PR ! Choose your target branch.
 
-
-## Resources
 
 [1]: https://git-scm.com/downloads
 [2]: https://phpunit.de
