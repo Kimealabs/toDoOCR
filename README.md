@@ -43,6 +43,7 @@
         <li><a href="#tests">Tests</a></li>
       </ul>
     </li>
+    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -124,19 +125,19 @@ DATABASE_URL="mysql://root:password@127.0.0.1:3306/YOUR DATABASE NAME"
 
 ### If your database don't exist yet :
 
-5. \> symfony console doctrine:database:create
+5. \> `symfony console doctrine:database:create`
 
-6. \> symfony console doctrine:schema:update -f
+6. \> `symfony console doctrine:schema:update -f`
 
 
 if you want demo data :
 
-7A. \> symfony console doctrine:fixtures:load --group=demo
+7A. \> `symfony console doctrine:fixtures:load --group=demo`
 
 
 ### If your database exist :
 
-Warning to your fields structure. Your database Task Table and User table must match with this architecture :
+**Warning** to your fields structure. Your database Task Table and User table must match with this architecture :
 
 | Field  | Type |
 | ------------- | ------------- |
@@ -156,9 +157,10 @@ Warning to your fields structure. Your database Task Table and User table must m
 
 
 
-If you want create an "anonymous" user, which one will recover all tasks with field "author" at NULL :
 
-7B. \> symfony console doctrine:fixtures:load --group=anonymous --append
+### !!! If you want create an "anonymous" user, which one will recover all tasks with field "author" at *NULL* :
+
+7B. \> `symfony console doctrine:fixtures:load --group=anonymous --append`
 
 
 
@@ -168,9 +170,9 @@ If you want create an "anonymous" user, which one will recover all tasks with fi
 
 ### Show the Application
 
-8. \> symfony server-start -d
+8. \> `symfony server-start -d`
 
-Now you can Open 127.0.0.1:8000
+Now you can Open **127.0.0.1:8000**
 
       
  
@@ -179,29 +181,34 @@ Now you can Open 127.0.0.1:8000
 
 
 <!-- TESTS -->
-## TESTS
+## Tests
 
 To test application with PHPunit :
 
-1. Edit .env.test. for config
+1. `Edit .env.test. for config`
 
-DATABASE_URL=mysql://root:password@127.0.0.1:3306/symfony-test
+DATABASE_URL=mysql://root:password@127.0.0.1:3306/symfony-test`
 
-2. \> symfony console doctrine:database:create --env=test
-3. \> symfony console doctrine:schema:update -f --env=test
-4. \> symfony console doctrine:fixtures:load --group=test --env=test
+2. \> `symfony console doctrine:database:create --env=test`
+3. \> `symfony console doctrine:schema:update -f --env=test`
+4. \> `symfony console doctrine:fixtures:load --group=test --env=test`
 
 5. You can use PHPUnit now like :
 
-  * \> vendor/bin/phpunit --coverage-html pubilc/coverage
+  * \> `vendor/bin/phpunit --coverage-html pubilc/coverage`
 
     OR
 
-  * \> vendor/bin/phpunit --filter METHOD_TO_TEST
+  * \> `vendor/bin/phpunit --filter METHOD_TO_TEST`
 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Contributing
+
+Click <a href="https://github.com/Kimealabs/toDoOCR/blob/main/CONTRIBUTING.md" >here to contribute</a>.
 
 
 <!-- ACKNOWLEDGMENTS -->
