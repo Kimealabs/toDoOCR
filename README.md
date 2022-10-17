@@ -154,6 +154,7 @@ if you want demo data :
 | username  | string |
 | email  | string |
 | password | string |
+| roles | json |
 
 
 
