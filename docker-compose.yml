@@ -4,7 +4,8 @@ services:
   databasetodo:
     image: "mysql:latest"
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: symfony
     ports:
       # To allow the host machine to access the ports below, modify the lines below.
