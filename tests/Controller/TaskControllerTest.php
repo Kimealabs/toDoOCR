@@ -3,8 +3,11 @@
 namespace App\Tests\Controller;
 
 use Faker\Factory;
+use App\Entity\User;
+use App\Entity\Task;
 use App\Repository\UserRepository;
 use App\Repository\TaskRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskControllerTest extends WebTestCase
