@@ -15,4 +15,4 @@ install:
     - php bin/console doctrine:schema:update --force --env=test
     - php bin/console doctrine:fixtures:load -n --group=test --env=test
 script:
-    - ./vendor/bin/simple-phpunit --coverage-text --colors
+    - vendor/bin/phpunit
