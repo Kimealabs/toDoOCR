@@ -1,9 +1,9 @@
 language: php
 sudo: false
-cache:
-    directories:
-        - $HOME/.composer/cache
-        - $HOME/symfony-bridge/.phpunit
+#cache:
+#    directories:
+#        - $HOME/.composer/cache
+#       - $HOME/symfony-bridge/.phpunit
 warnings_are_errors: true
 services:
     - mysql
