@@ -1,0 +1,32 @@
+
+
+Code Coverage Report:      
+  2022-10-19 16:55:29      
+                           
+ Summary:                  
+  Classes: 80.00% (8/10)   
+  Methods: 94.34% (50/53)  
+  Lines:   97.83% (135/138)
+
+App\Controller\RegistrationController
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 10/ 10)
+App\Controller\SecurityController
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  3/  3)
+App\Controller\TaskController
+  Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 37/ 37)
+App\Controller\UserController
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% ( 11/ 11)
+App\Entity\Task
+  Methods: 100.00% (12/12)   Lines: 100.00% ( 17/ 17)
+App\Entity\User
+  Methods: 100.00% (14/14)   Lines: 100.00% ( 20/ 20)
+App\Kernel
+  Methods:  ( 0/ 0)   Lines:  (  0/  0)
+App\Repository\TaskRepository
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  7/  7)
+App\Repository\UserRepository
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  7/  7)
+App\Security\SecurityEventSubscriber
+  Methods:  66.67% ( 4/ 6)   Lines:  88.24% ( 15/ 17)
+App\Security\Voter\DeleteTaskVoter
+  Methods:  75.00% ( 3/ 4)   Lines:  88.89% (  8/  9)

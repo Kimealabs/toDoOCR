@@ -34,6 +34,7 @@ class UserEntityTest extends KernelTestCase
             ->setUsername(self::VALID_USERNAME_VALUE);
 
         $this->getValidationErrors($user, 0);
+        $this->assertSame($user->getTasks(), null);
     }
 
     /**

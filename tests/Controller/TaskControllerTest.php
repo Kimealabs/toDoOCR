@@ -62,6 +62,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame(!$doneStatus, $taskToControl->getIsDone());
     }
 
+
     public function provideDataToTestTaskToggleButtonForChangeIsDoneStatus(): array
     {
         return [
@@ -70,7 +71,10 @@ class TaskControllerTest extends WebTestCase
         ];
     }
 
-    public function testEditTask(): void
+    /**
+     *  @dataProvider provideDataToTestEditTask 
+     */
+    public function testEditTask(bool $isDone): void
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
@@ -80,7 +84,7 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirects();
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
-        $taskToEdit = $taskRepository->findOneBy([], ['id' => 'DESC']); // Last Task
+        $taskToEdit = $taskRepository->findOneBy(['isDone' => $isDone], ['id' => 'DESC']); // Last Task
 
         $crawler = $client->request('GET', '/task/' . $taskToEdit->getId() . '/edit');
         $crawler = $client->submitForm('Modifier', [
@@ -97,6 +101,15 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame($controlTitle, $taskToEdit->getTitle() . ' Updated');
         $this->assertSame($controlContent, $taskToEdit->getContent() . ' Updated');
     }
+
+    public function provideDataToTestEditTask(): array
+    {
+        return [
+            [true],
+            [false]
+        ];
+    }
+
 
     public function testCreateTask(): void
     {
@@ -153,8 +166,6 @@ class TaskControllerTest extends WebTestCase
      */
     public function provideDataToTestDeleteTaskByUserProfile(): array
     {
-        self::ensureKernelShutdown();
-
         return [
             [false, 4, '.alert.alert-success', 'La tâche a bien été supprimée.'],
             [true, 1, '.alert.alert-success', 'La tâche a bien été supprimée.'],
