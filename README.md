@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/131ff1ae4896478f9e01ae84ffc4477c)](https://www.codacy.com/gh/Kimealabs/toDoOCR/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Kimealabs/toDoOCR&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f242225de6473dcc77f6/maintainability)](https://codeclimate.com/github/Kimealabs/toDoOCR/maintainability)
+[![Build Status](https://app.travis-ci.com/Kimealabs/toDoOCR.svg?branch=main)](https://app.travis-ci.com/Kimealabs/toDoOCR)
 <img src="https://img.shields.io/badge/PHP 8.1-black?style=flat-square&logo=Php" />
 <img src="https://img.shields.io/badge/LICENCE-MIT-blue" />
 
@@ -184,9 +185,11 @@ Now you can Open **127.0.0.1:8000**
 <!-- TESTS -->
 ## Tests
 
-To test application with PHPunit :
+**Continuous integration** has been implemented with <a href="https://www.travis-ci.com/" >Travis CI</a>.
 
-1. `Edit .env.test. for config`
+To test manually the application with PHPunit :
+
+1. `Edit .env.test. for config` **(for *Travis CI* do not use password and only root or travis user name in db config)**
 
 DATABASE_URL=mysql://root:password@127.0.0.1:3306/symfony-test`
 
