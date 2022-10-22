@@ -88,7 +88,7 @@ Please use our conventional prefixes according to your contribution:
 #### Tests
 
 This project use unit and functional tests. To control if yours contribution are well, please run tests often.
-You can create your own tests but only One rule => do not decrease the code coverage.
+You should always create your own tests when adding code in your PR => PR without tests or/and decreasing code coverage won't be merged
 
 
 ### 5. Create a pull request
